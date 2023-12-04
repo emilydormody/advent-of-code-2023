@@ -6,11 +6,10 @@ total = 0
 while line != "":
     wins = line[0:30:].split()
     numbers = line[32::].split()
-    print(wins)
+    card_length = len(wins)+len(numbers)
     num_wins = 0
-    for n in numbers:
-        if n in wins:
-            num_wins += 1
+    if len(set(wins+numbers)) < card_length:
+        num_wins = card_length - len(set(wins+numbers))
     if num_wins > 0:
         total += 2**(num_wins-1)
     line = file.readline()[9::]

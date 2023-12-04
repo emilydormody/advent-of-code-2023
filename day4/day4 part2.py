@@ -8,9 +8,9 @@ while line != "":
     wins = line[0:30:].split()
     numbers = line[32::].split()
     num_wins = 0
-    for n in numbers:
-        if n in wins:
-            num_wins += 1
+    card_length = len(wins)+len(numbers)
+    if len(set(wins+numbers)) < card_length:
+        num_wins = card_length - len(set(wins+numbers))
     if num_wins > 0:
         for i in range(cards_count[curr]):
             start = curr + 1
@@ -19,6 +19,5 @@ while line != "":
                 start += 1
     line = file.readline()[9::]
     curr += 1
-    print(cards_count)
 
 print("Total score:", sum(cards_count))
