@@ -1,8 +1,6 @@
-file = open("day5/input.txt", "r")
-lst = file.readline().split()[1::]
-seeds = []
-for i in range(0,len(lst),2):
-    seeds += [int(lst[i])+x for x in range(int(lst[i+1]))]
+file = open("input.txt", "r")
+seeds = file.readline().split()[1::]
+
 file.readline()
 
 def fill_map(lst):
@@ -14,6 +12,12 @@ def fill_map(lst):
     print(lst)
     return lst
 
+def check_location(loc):
+    for i in range(0, len(seeds), 2):
+        if int(seeds[i]) <= loc < int(seeds[i])+int(seeds[i+1]):
+            return True
+    return False
+
 seed_soil = fill_map([])
 soil_fertilizer = fill_map([])
 fertilizer_water = fill_map([])
@@ -23,13 +27,14 @@ temp_humid = fill_map([])
 humid_location = fill_map([])
 
 minimum = []
-for seed in seeds:
-    curr = int(seed)
-    for d in [seed_soil, soil_fertilizer, fertilizer_water,water_light,light_temp,temp_humid,humid_location]:
+for location in range(0,199602917): # previous solution
+    curr = location
+    for d in [humid_location, temp_humid,light_temp,water_light,fertilizer_water,soil_fertilizer, seed_soil]:
         for mapping in d:
-            if mapping[1] <= curr < mapping[1]+mapping[2]:
-                curr = mapping[0] + (curr-mapping[1])
+            if mapping[0] <= curr < mapping[0]+mapping[2]:
+                curr = mapping[1] + (curr-mapping[0])
                 break
-    minimum.append(curr)
-print(min(minimum))
+    if check_location(curr, seeds):
+        print(location)
+        break
 
