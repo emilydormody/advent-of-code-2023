@@ -9,7 +9,6 @@ def fill_map(lst):
     while line != []:
         lst.append([int(line[0]), int(line[1]), int(line[2])])
         line = file.readline().split()
-    print(lst)
     return lst
 
 def check_location(loc):
@@ -34,7 +33,7 @@ for location in range(0,199602917): # previous solution
             if mapping[0] <= curr < mapping[0]+mapping[2]:
                 curr = mapping[1] + (curr-mapping[0])
                 break
-    if check_location(curr, seeds):
+    if check_location(curr):
         print(location)
         break
 
