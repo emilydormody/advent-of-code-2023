@@ -15,6 +15,6 @@ sum = 0
 while line != []:
     line = [int(x) for x in line]
     sum += get_extra(line)
-    line = line = file.readline().split()
+    line = file.readline().split()
 
 print(sum)
